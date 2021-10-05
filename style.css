@@ -51,10 +51,53 @@ img {
     font-family: var(--title-font);
 
 }
+
+@keyframes preloader {
+    0% {
+        transform: rotate(0deg) scale(0.8);
+    }
+
+    50% {
+        transform: rotate(360deg) scale(1.2);
+    }
+
+    100% {
+        transform: rotate(720deg) scale(0.8);
+    }
+}
+
+.loading-ring {
+    animation: 3s infinite linear preloader;
+    display: none;
+    width: 100px;
+    height: 100px;
+    background-color: transparent;
+    border: 10px solid var(--accent-color);
+    border-radius: 50%;
+    border-left-color: transparent;
+    margin-top: 20vh;
+}
+
+.fetch-error {
+    display: none;
+    font-size: 1.7em;
+    text-align: center;
+    margin-top: 10vh;
+}
+
+.fetch-error--active {
+    display: block;
+}
+
+.loading-ring--active {
+    display: block;
+}
+
+
 .companies-list {
+    display: flex;
     padding: 20px;
     max-width: 1300px;
-    display: flex;
     flex-wrap: wrap;
     justify-content: center;
 }
