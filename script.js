@@ -4,9 +4,17 @@ const companiesList = document.querySelector(".companies-list");
 const preloader = document.querySelector(".loading-ring");
 
 preloader.classList.add("loading-ring--active");
-fetch("https://jsonplaceholder.typicode.com/users")
+
+const controller = new AbortController();
+const timeoutId = setTimeout(() => controller.abort(), 10000);
+
+fetch("https://jsonplaceholder.typicode.com/users", {
+  signal: controller.signal,
+})
   .then((blob) => blob.json())
   .then((users) => {
+    clearTimeout(timeoutId);
+
     preloader.classList.remove("loading-ring--active");
     for (let user of users) {
       createCompanyItem(user);
@@ -21,11 +29,22 @@ fetch("https://jsonplaceholder.typicode.com/users")
       })
     );
   })
-  .catch(() => {
+  .catch((err) => {
     preloader.classList.remove("loading-ring--active");
-    const errorMessage = document.querySelector('.fetch-error');
-    errorMessage.classList.add('fetch-error--active');
+
+    if (err.name === 'AbortError') {
+      const error = document.querySelector('.timeout-error');
+      error.classList.add("timeout-error--active");
+      return;
+    }
+
+    clearTimeout(timeoutId);
+
+    preloader.classList.remove("loading-ring--active");
+    const errorMessage = document.querySelector(".fetch-error");
+    errorMessage.classList.add("fetch-error--active");
   });
+
 
 /**
  * Add to companiesList <li> with info about one company
