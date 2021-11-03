@@ -45,7 +45,7 @@ img {
 
 .title {
   margin-top: 10vh;
-  margin-bottom: 7vh;
+  margin-bottom: 5vh;
   font-size: 4em;
   color: var(--text-accent-color);
   font-family: var(--title-font);
@@ -92,6 +92,49 @@ img {
 .fetch-error--active,
 .timeout-error--active {
   display: block;
+}
+
+.search {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  width: 85%;
+  max-width: 1000px;
+  margin-bottom: 7vh;
+
+}
+
+.search__input {
+  flex-grow: 1;
+  padding: 0.5em;
+  border-radius: 5px;
+  border-color:var(--text-accent-color);
+  border-width: 2px;
+  font: inherit;
+  font-size: 1em;
+  color: inherit;
+  transition: 0.5s;
+  margin-right: 3px;
+}
+
+.search__input:focus {
+  margin-top: 4vh;
+  outline: none;
+  border-left: none;
+  border-right: none;
+  border-top: none;
+  border-width: 4px;
+  transform: scale(1.01);
+}
+
+.search__submit {
+  border: none;
+  padding: 0.3em 1em;
+  border-radius: 5px;
+  background-color: var(--text-accent-color);
+  color: white;
+  font: inherit;
+  font-size: 1.3em;
 }
 
 .companies-list {
