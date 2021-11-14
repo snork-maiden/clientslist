@@ -95,13 +95,16 @@ img {
 }
 
 .search {
-  display: flex;
+  display: none;
   flex-wrap: wrap;
   align-items: flex-end;
   width: 85%;
   max-width: 1000px;
   margin-bottom: 7vh;
+}
 
+.search--active {
+  display: flex;
 }
 
 .search__input {

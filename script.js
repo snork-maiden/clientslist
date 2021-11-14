@@ -5,35 +5,27 @@ const preloader = document.querySelector(".loading-ring");
 
 preloader.classList.add("loading-ring--active");
 
-const controller = new AbortController();
-const timeoutId = setTimeout(() => controller.abort(), 10000);
+const searchForm = document.querySelector(".search");
+const searchInput = searchForm.querySelector(".search__input");
 
-fetch("https://jsonplaceholder.typicode.com/users", {
-  signal: controller.signal,
-})
-  .then((blob) => blob.json())
-  .then((users) => {
-    clearTimeout(timeoutId);
+/**
+ * Download and show all companies 
+ */
+async function showCompanies() {
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), 10000);
 
-    preloader.classList.remove("loading-ring--active");
-    for (let user of users) {
-      createCompanyItem(user);
-    }
-
-    const contactPersonButtons = companiesList.querySelectorAll(
-      ".company__contact-person"
-    );
-    contactPersonButtons.forEach((button) =>
-      button.addEventListener("click", () => {
-        button.classList.toggle("company__contact-person--open");
-      })
-    );
-  })
-  .catch((err) => {
+  let users;
+  try {
+    const blob = await fetch("https://jsonplaceholder.typicode.com/users", {
+      signal: controller.signal,
+    });
+    users = await blob.json();
+  } catch (err) {
     preloader.classList.remove("loading-ring--active");
 
-    if (err.name === 'AbortError') {
-      const error = document.querySelector('.timeout-error');
+    if (err.name === "AbortError") {
+      const error = document.querySelector(".timeout-error");
       error.classList.add("timeout-error--active");
       return;
     }
@@ -43,8 +35,26 @@ fetch("https://jsonplaceholder.typicode.com/users", {
     preloader.classList.remove("loading-ring--active");
     const errorMessage = document.querySelector(".fetch-error");
     errorMessage.classList.add("fetch-error--active");
-  });
+  }
 
+  clearTimeout(timeoutId);
+
+  preloader.classList.remove("loading-ring--active");
+  searchForm.classList.add("search--active");
+
+  for (let user of users) {
+    createCompanyItem(user);
+  }
+
+  const contactPersonButtons = companiesList.querySelectorAll(
+    ".company__contact-person"
+  );
+  contactPersonButtons.forEach((button) =>
+    button.addEventListener("click", () => {
+      button.classList.toggle("company__contact-person--open");
+    })
+  );
+}
 
 /**
  * Add to companiesList <li> with info about one company
@@ -122,13 +132,13 @@ function displayMatches() {
     company.hidden = false;
 
     const text = company.textContent.toLowerCase();
-    if(!text.includes(query)) {
+    if (!text.includes(query)) {
       company.hidden = true;
     }
   }
-
 }
 
-const searchInput = document.querySelector(".search__input");
+showCompanies();
+
 searchInput.addEventListener("change", displayMatches);
 searchInput.addEventListener("keyup", displayMatches);
