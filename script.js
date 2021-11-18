@@ -9,7 +9,7 @@ const searchForm = document.querySelector(".search");
 const searchInput = searchForm.querySelector(".search__input");
 
 /**
- * Download and show all companies 
+ * Download and show all companies
  */
 async function showCompanies() {
   const controller = new AbortController();
@@ -32,9 +32,9 @@ async function showCompanies() {
 
     clearTimeout(timeoutId);
 
-    preloader.classList.remove("loading-ring--active");
     const errorMessage = document.querySelector(".fetch-error");
     errorMessage.classList.add("fetch-error--active");
+    return;
   }
 
   clearTimeout(timeoutId);
