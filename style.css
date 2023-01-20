@@ -1,13 +1,9 @@
-html {
-  box-sizing: border-box;
-}
-
 *,
 *::before,
 *::after {
   margin: 0;
   padding: 0;
-  box-sizing: inherit;
+  box-sizing: border-box;
 }
 
 ul,
@@ -116,7 +112,7 @@ img {
   width: 100%;
   padding: 0.5em;
   border-radius: 5px;
-  border-color:var(--text-accent-color);
+  border-color: var(--text-accent-color);
   border-width: 2px;
   font: inherit;
   font-size: 1em;
@@ -143,6 +139,7 @@ img {
   justify-content: center;
 }
 .companies-list__item {
+  flex-grow: 1;
   max-width: 350px;
   margin-bottom: 50px;
   padding: 10px;
@@ -178,16 +175,26 @@ img {
   color: var(--hidden-info-text-color);
 }
 
-.company__contact-person--open ~ .user {
-  display: block;
-}
 .user {
+  position: absolute;
+  pointer-events: none;
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
   margin-left: auto;
-  margin-top: 15px;
-  display: none;
   width: 90%;
+}
+
+.company__contact-person--open ~ .user {
+  pointer-events: all;
+  position: static;
+  opacity: 1;
+  max-height: 990px;
+  opacity: 1;
+  margin-top: 15px;
   padding: 10px;
   border: 1px solid var(--hidden-info-text-color);
+  transition: opacity 0.4s ease-out, max-height 0.8s ease-out;
 }
 .user__name {
   text-align: center;
@@ -214,38 +221,3 @@ img {
   color: var(--text-accent-color);
   text-decoration: underline;
 }
-
-/*  CSS HEX 
---safety-orange-blaze-orange: #f26419ff;
---davys-grey: #595959ff;
---maximum-yellow-red: #ffc857ff;
---viridian-green: #119da4ff;
---raisin-black: #272932ff;
-
-/* CSS HSL 
---safety-orange-blaze-orange: hsla(21, 89%, 52%, 1);
---davys-grey: hsla(0, 0%, 35%, 1);
---maximum-yellow-red: hsla(40, 100%, 67%, 1);
---viridian-green: hsla(183, 81%, 35%, 1);
---raisin-black: hsla(229, 12%, 17%, 1);
-
-/* SCSS HEX 
-$safety-orange-blaze-orange: #f26419ff;
-$davys-grey: #595959ff;
-$maximum-yellow-red: #ffc857ff;
-$viridian-green: #119da4ff;
-$raisin-black: #272932ff;
-
-/* SCSS HSL 
-$safety-orange-blaze-orange: hsla(21, 89%, 52%, 1);
-$davys-grey: hsla(0, 0%, 35%, 1);
-$maximum-yellow-red: hsla(40, 100%, 67%, 1);
-$viridian-green: hsla(183, 81%, 35%, 1);
-$raisin-black: hsla(229, 12%, 17%, 1);
-
-/* SCSS RGB 
-$safety-orange-blaze-orange: rgba(242, 100, 25, 1);
-$davys-grey: rgba(89, 89, 89, 1);
-$maximum-yellow-red: rgba(255, 200, 87, 1);
-$viridian-green: rgba(17, 157, 164, 1);
-$raisin-black: rgba(39, 41, 50, 1); */

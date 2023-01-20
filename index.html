@@ -11,20 +11,32 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="style.css" />
+    <link rel="icon" href="favicon.svg" />
     <title>Clients list</title>
   </head>
 
   <body class="page">
     <h1 class="title">Our clients</h1>
 
-    <p class="fetch-error">Oops! Download failed.<br> Please try again later</p>
-    <p class="timeout-error">Oops! Timeout error.<br> Please try again later</p>
+    <p class="fetch-error">
+      Oops! Download failed.<br />
+      Please try again later
+    </p>
+    <p class="timeout-error">
+      Oops! Timeout error.<br />
+      Please try again later
+    </p>
     <div class="loading-ring"></div>
     <form action="#" class="search" id="search-form">
-      <input type="search" name="companies-search" id="companies-search" class="search__input" placeholder="Search by any client info...">
+      <input
+        type="search"
+        name="companies-search"
+        id="companies-search"
+        class="search__input"
+        placeholder="Search by any client info..."
+      />
     </form>
-    <ul class="companies-list">
-    </ul>
+    <ul class="companies-list"></ul>
     <script src="script.js"></script>
   </body>
 </html>
