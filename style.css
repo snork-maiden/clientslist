@@ -31,7 +31,7 @@ img {
 
 .page {
   font-family: var(--main-font);
-  font-size: 20px;
+  font-size: clamp(18px, 3vw, 20px);
   color: var(--text-color);
   margin: 0 20px;
   display: flex;
@@ -43,16 +43,11 @@ img {
   text-align: center;
   margin-top: 10vh;
   margin-bottom: 5vh;
-  font-size: 3em;
+  font-size: clamp(3em, 10vw, 4em);
   color: var(--text-accent-color);
   font-family: var(--title-font);
 }
 
-@media screen and (min-width: 600px) {
-  .title {
-    font-size: 4em;
-  }
-}
 
 @keyframes preloader {
   0% {
@@ -133,6 +128,7 @@ img {
 
 .companies-list {
   display: flex;
+  gap: min(5vw, 50px);
   padding: 20px;
   max-width: 1300px;
   flex-wrap: wrap;
@@ -140,25 +136,22 @@ img {
 }
 .companies-list__item {
   flex-grow: 1;
+  flex-basis: 300px;
   max-width: 350px;
-  margin-bottom: 50px;
   padding: 10px;
   border-top: 3px solid var(--accent-color);
 }
 
-.companies-list__item:not(:last-child) {
-  margin-right: 50px;
-}
-
 .company {
-  min-height: 210px;
   display: flex;
   flex-direction: column;
+  height: 100%;
+  min-height: clamp(80px, 22vh, 210px);
 }
 
 .company__name {
   font-family: var(--title-font);
-  font-size: 1.8em;
+  font-size: clamp(28px, 6vw, 1.8em);
   margin-bottom: 15px;
 }
 .company__catch-phrase {
@@ -190,7 +183,6 @@ img {
   position: static;
   opacity: 1;
   max-height: 990px;
-  opacity: 1;
   margin-top: 15px;
   padding: 10px;
   border: 1px solid var(--hidden-info-text-color);

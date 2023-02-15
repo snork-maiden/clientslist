@@ -50,7 +50,7 @@ async function showCompanies() {
     ".company__contact-person"
   );
   contactPersonButtons.forEach((button) =>
-    button.addEventListener("click", () => {
+    button.addEventListener("click", (e) => {
       button.classList.toggle("company__contact-person--open");
     })
   );
@@ -82,7 +82,7 @@ function createCompanyItem(user) {
             <p class="company__catch-phrase">
             ${user.company.catchPhrase}
             </p>
-          <button class="company__contact-person">Contact person</button>
+          <button type="button" class="company__contact-person">Contact person</button>
           <div class="user">
             <h3 class="user__name">${user.name}</h3>
             <p class="user__username">@${user.username}</p>
